@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Insoles_noAPI</string>
+
+    <string name="instructions">
+        1) Shake the insoles;\n
+        2) (Optional) Open MoticonApp, select "Record", choose the insoles, connect and zeroize them. 
+        Then disconnect.\n
+        3) Select "Range extension", choose the insoles and wait for the first connection (shake the insoles).\n
+        4) Open "AcquisitionApp v1", touch "Listen TCP".\n
+        5) To stop the gait session, open MoticonApp and touch "Disconnect".\n
+        6) Wait a few minutes and check the created files in "internalStorage/Documents".\n
+    </string>
+    
+    <!-- ** PERMISSION REQUEST STRINGS ** -->
+    <string name="permission_title">MoveCare needs your permission</string>
+    <string name="permission_request">This allows the app to properly work, access to position, pedometer,
+        accelerometer, phone number, message and call registry, create and send user reports, send notifications and
+        run in the background. </string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Quit</string>
+
+    <!-- ** PERMISSION ERROR STRINGS ** -->
+    <string name="permissionError_title">Permission Error</string>
+    <string name="permissionError_request">Sorry, MoveCare needs your permission to continue.</string>
+
+    
+</resources>
