@@ -34,12 +34,7 @@ public class MainActivity extends AppCompatActivity implements PermissionDialogL
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.READ_CALL_LOG,
             Manifest.permission.CALL_PHONE,
-
-            /* Permission Group "SMS" */
-            Manifest.permission.READ_SMS,
-
-            /* Permission Group "Location", which includes ACCESS_COURSE_LOCATION */
-            //Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.INTERNET,
 
             Manifest.permission.READ_CONTACTS,
             Manifest.permission.READ_EXTERNAL_STORAGE,
