@@ -13,9 +13,7 @@
     
     <!-- ** PERMISSION REQUEST STRINGS ** -->
     <string name="permission_title">MoveCare needs your permission</string>
-    <string name="permission_request">This allows the app to properly work, access to position, pedometer,
-        accelerometer, phone number, message and call registry, create and send user reports, send notifications and
-        run in the background. </string>
+    <string name="permission_request">It allows the app to communicate with the insoles and read call registry. </string>
     <string name="ok">Ok</string>
     <string name="cancel">Quit</string>
 
