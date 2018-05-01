@@ -74,7 +74,7 @@ public class SmartphoneLogReader {
 
                 String[] s = new String[2];
                 long s0 = cursor.getLong(1);        // ts_start
-                long duration = cursor.getInt(2);   // duration
+                long duration = cursor.getInt(2)*1000;   // duration
                 long s1 = s0 + duration;                      // ts_end
                 s[0] = String.valueOf(s0);
                 s[1] = String.valueOf(s1);
