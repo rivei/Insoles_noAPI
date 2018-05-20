@@ -6,13 +6,10 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.polimi.insolesNoAPI.logic.log.SmartphoneLogReader;
-import com.polimi.insolesNoAPI.model.phoneReport.Call;
 import com.polimi.insolesNoAPI.ui.MainActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Calendar;
 import java.util.List;
 
 public class CreateTimestampFileService extends IntentService {

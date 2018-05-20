@@ -16,7 +16,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class DaoInsoles extends Dao {
-    private static final String TAG = DaoLogs.class.getSimpleName();
+    private static final String TAG = DaoInsoles.class.getSimpleName();
 
     //private static final int ALL_DATA_BYTE = 101777407;
     private static final int LAST_BIT_POSITION = 26;
