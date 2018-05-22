@@ -2,7 +2,6 @@ package com.polimi.insolesNoAPI.model.insoles;
 
 
 public class InsolesRawHeader {
-
     private Long sessionDate;
     private Double sampleRate;
 
@@ -11,6 +10,7 @@ public class InsolesRawHeader {
 
     private Integer leftID;
     private Integer leftSensor;
+    private long sessionID; //add for retrieve all data
 
     public InsolesRawHeader(Long sessionDate, Double sampleRate, Integer leftID, Integer leftSensor, Integer rightID, Integer rightSensor) {
         this.sessionDate = sessionDate;
@@ -47,6 +47,14 @@ public class InsolesRawHeader {
 
     public int getLeftSensor() {
         return leftSensor;
+    }
+
+    public long getSessionID() {
+        return sessionID;
+    }
+
+    public void setSessionID(long sessionID) {
+        this.sessionID = sessionID;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.polimi.insolesNoAPI.applicationLogic.service;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -25,8 +26,8 @@ import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class TCPListenerService extends IntentService {
-    private static final String TAG = TCPListenerService.class.getSimpleName();
+public class TimeTestingService extends IntentService {
+    private static final String TAG = TimeTestingService.class.getSimpleName();
 
     private static final String SESSION_ID = "sessionID";
     private static final String SESSION_DATE = "sessionDate";
@@ -42,8 +43,8 @@ public class TCPListenerService extends IntentService {
     private static final int MSG_LENGTH_BYTE = 4;
     private int mem_count = 0;
 
-    public TCPListenerService() {
-        super("TCPListenerService");
+    public TimeTestingService() {
+        super("TimeTestingService");
     }
 
     private int fromByteToInt (byte[] byteArray){
@@ -53,33 +54,46 @@ public class TCPListenerService extends IntentService {
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
+    protected void onHandleIntent(@Nullable Intent intent) {
         Log.i(TAG, "Start service");
 
         final Context context = this;
 
-        setMainActivityTextView("Trying to connect..");
-        try(ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
-            Socket connectionSocket = serverSocket.accept();
-            DataInputStream in = new DataInputStream(connectionSocket.getInputStream());
-            MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(in) )
-        {
-            setMainActivityTextView("Connecting..");
-
-            Log.e("Client port: ",""+serverSocket.getLocalPort());
+/*        setMainActivityTextView("Trying to connect..");
+//        try(ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
+//            Socket connectionSocket = serverSocket.accept();
+//            DataInputStream in = new DataInputStream(connectionSocket.getInputStream());
+//            MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(in) )
+//        {
+//            setMainActivityTextView("Connecting..");
+//
+//            Log.e("Client port: ",""+serverSocket.getLocalPort());
             sessionDate = Calendar.getInstance().getTimeInMillis();
 
             final ObjectMapper objectMapper = new ObjectMapper(new MessagePackFactory());
             TypeReference<List<Object>> typeReference = new TypeReference<List<Object>>(){};
 
             // First row is header (InsolesRawHeader object)
-            if(unpacker.hasNext()){
-                sessionID = readFirstRow(unpacker, objectMapper, typeReference, sessionDate);
-            }
-            else{
-                Log.e("Error", "Nothing to read");
-                return;
-            }
+//            if(unpacker.hasNext()){
+//                sessionID = readFirstRow(unpacker, objectMapper, typeReference, sessionDate);
+//            }
+//            else{
+//                Log.e("Error", "Nothing to read");
+//                return;
+//            }
+        LinkedHashMap map = (LinkedHashMap) rawData.get(1);
+        InsolesManager insolesManager = new InsolesManager();
+        sessionID = insolesManager.saveRawHeader(
+                this,
+                new InsolesRawHeader(
+                        sessionDate,
+                        (Double) map.get(RATE_STRING),                                          // sample rate
+                        (Integer)(((LinkedHashMap) map.get(LEFT_STRING)).get(INS_ID_STRING)),   // left ID
+                        (Integer)(((LinkedHashMap) map.get(LEFT_STRING)).get(INS_SENS_STRING)), // left sensor
+                        (Integer)(((LinkedHashMap) map.get(RIGHT_STRING)).get(INS_ID_STRING)),  // right ID
+                        (Integer)(((LinkedHashMap) map.get(RIGHT_STRING)).get(INS_SENS_STRING)) // right sensor
+                )
+        );
             //int count = 0;
             setMainActivityTextView("Receiving ..");
             while (unpacker.hasNext()){
@@ -117,9 +131,9 @@ public class TCPListenerService extends IntentService {
             }
             setMainActivityTextView("End receiving");
             Log.e("Fine", "Socket closed");
-        } catch (IOException e) {
-            Log.e("TCP", "C: Error", e);
-        }
+//        } catch (IOException e) {
+//            Log.e("TCP", "C: Error", e);
+//        }
 
         // Create data output file
         Intent createFileIntent = new Intent(this, CreateOutputFileService.class);
@@ -132,7 +146,7 @@ public class TCPListenerService extends IntentService {
         timestampIntent.putExtra(SESSION_DATE, sessionDate);
         startService(timestampIntent);
 
-        Log.i(TAG, "End service");
+        Log.i(TAG, "End service");*/
     }
 
     private long readFirstRow(MessageUnpacker unpacker, ObjectMapper objectMapper, TypeReference<List<Object>> typeReference,
@@ -188,9 +202,8 @@ public class TCPListenerService extends IntentService {
 
     private void setMainActivityTextView(String val){
         try {
-            if (MainActivity.getInst() != null) {
+            if (MainActivity.getInst() != null)
                 MainActivity.getInst().updateUIStrings(val);
-            }
         } catch (Exception e) {
             Log.e(TAG, "Exception caught: cannot update UI strings");
             e.printStackTrace();

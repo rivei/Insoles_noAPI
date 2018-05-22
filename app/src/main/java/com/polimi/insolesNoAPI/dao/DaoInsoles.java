@@ -270,7 +270,7 @@ public class DaoInsoles extends Dao {
     }
 
 
-    public List<InsolesRawHeader> retrieveAllRawHeaders(long sessionID){
+    public List<InsolesRawHeader> retrieveAllRawHeaders(){
         Log.v(TAG, "Method retrieveAllRawHeaders: start");
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -303,14 +303,14 @@ public class DaoInsoles extends Dao {
 
             while (cursor.moveToNext()) {
                 InsolesRawHeader header = new InsolesRawHeader(
-                        cursor.getLong(0),      // session data
+                        cursor.getLong(0),      // session date
                         cursor.getDouble(1),    // sample rate
                         cursor.getInt(2),       // left ID
                         cursor.getInt(3),       // left sensor
                         cursor.getInt(4),       // right ID
                         cursor.getInt(5)        // right sensor
                 );
-
+                header.setSessionID(cursor.getLong(cursor.getColumnIndex("_id")));
                 headerList.add(header);
             }
         }

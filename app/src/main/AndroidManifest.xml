@@ -1,7 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.polimi.insolesNoAPI"
     android:installLocation="internalOnly">
-
 
     <!-- NORMAL PERMISSIONS -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,9 +12,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_SMS" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 
     <application
         android:allowBackup="true"
@@ -24,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.polimi.insolesNoAPI.ui.MainActivity"
+            android:name=".ui.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -35,13 +33,13 @@
         </activity>
 
         <!-- SERVICE -->
-        <service android:name="com.polimi.insolesNoAPI.applicationLogic.service.TCPListenerService" />
+        <service android:name=".applicationLogic.service.TCPListenerService" />
+        <service android:name=".applicationLogic.service.CreateOutputFileService" />
+        <service android:name=".applicationLogic.service.CreateTimestampFileService" />
+        <service android:name=".applicationLogic.service.TimeTestingService" />
+        <service android:name=".applicationLogic.service.ReadTestingService" />
 
-        <service android:name="com.polimi.insolesNoAPI.applicationLogic.service.CreateOutputFileService" />
-
-        <service android:name="com.polimi.insolesNoAPI.applicationLogic.service.CreateTimestampFileService" />
-
-
+        <activity android:name=".ui.DataPreviewActivity"/>
     </application>
 
 </manifest>

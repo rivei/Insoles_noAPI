@@ -12,16 +12,21 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.polimi.insolesNoAPI.R;
 import com.polimi.insolesNoAPI.applicationLogic.service.CreateTimestampFileService;
+import com.polimi.insolesNoAPI.applicationLogic.service.ReadTestingService;
 import com.polimi.insolesNoAPI.applicationLogic.service.TCPListenerService;
+import com.polimi.insolesNoAPI.logic.insoles.InsolesManager;
+import com.polimi.insolesNoAPI.model.insoles.InsolesRawHeader;
 import com.polimi.insolesNoAPI.ui.fragment.PermissionErrorFragment;
 import com.polimi.insolesNoAPI.ui.fragment.PermissionFragment;
 import com.polimi.insolesNoAPI.ui.interfaces.PermissionDialogListener;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements PermissionDialogL
     //private DialogFragment initFragment;
     private DialogFragment permissionFragment;
     private DialogFragment permissionErrorFragment;
+
+    //private static Button bnRead;
 
     /**
      * Release memory when the UI becomes hidden or when system resources become low.
@@ -122,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements PermissionDialogL
 
         TextView instructionsText = (TextView)findViewById(R.id.instructionText);
         instructionsText.setText(R.string.instructions);
+        //bnRead = (Button)findViewById(R.id.readButton);
 
         boolean permissionRequestNeeded = false;
 
@@ -195,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements PermissionDialogL
 
 
     public void startClicked(View view) {
+        //bnRead.setVisibility(View.INVISIBLE);
         startService(new Intent(this, TCPListenerService.class));
 
         /*Calendar c = Calendar.getInstance();
@@ -205,10 +214,24 @@ public class MainActivity extends AppCompatActivity implements PermissionDialogL
         startService(timestampIntent);*/
     }
 
+    public void readClicked(View view){
+        //startService(new Intent(this, ReadTestingService.class));
+        InsolesManager insolesManager = new InsolesManager();
+        List<InsolesRawHeader> rawHeaderList = insolesManager.getAllRawHeaders(this);
+
+        // Show Data from last trial
+        long sessionID = rawHeaderList.get(rawHeaderList.size() - 1).getSessionID();
+        Intent datapreviewIntent = new Intent(this, DataPreviewActivity.class);
+        datapreviewIntent.putExtra("sessionID", sessionID);
+        startActivity(datapreviewIntent);
+    }
+
     public static MainActivity getInst()
     {
+        //bnRead.setVisibility(View.VISIBLE);
         return ins;
     }
+
 
     public void updateUIStrings(final String s) {
         MainActivity.this.runOnUiThread(new Runnable() {

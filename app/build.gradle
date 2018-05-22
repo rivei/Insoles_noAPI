@@ -35,5 +35,6 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'org.msgpack:jackson-dataformat-msgpack:0.8.14'
+    implementation 'com.jjoe64:graphview:4.2.2'
     testImplementation 'junit:junit:4.12'
 }

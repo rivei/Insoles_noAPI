@@ -60,6 +60,10 @@ public class InsolesManager {
         return new DaoInsoles(context).retrieveRawHeader(sessionID);
     }
 
+    public List<InsolesRawHeader> getAllRawHeaders(Context context){
+        return new DaoInsoles(context).retrieveAllRawHeaders();
+    }
+
     /* ****** INSOLES ****** */
     public void saveInsoles(Context context, Insoles insoles){
         DaoInsoles daoInsoles = new DaoInsoles(context);
