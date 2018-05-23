@@ -1,7 +1,9 @@
 package com.polimi.insolesNoAPI.ui;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.content.ComponentCallbacks2;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.polimi.insolesNoAPI.R;
+import com.polimi.insolesNoAPI.applicationLogic.service.CreateOutputFileService;
 import com.polimi.insolesNoAPI.applicationLogic.service.CreateTimestampFileService;
 import com.polimi.insolesNoAPI.applicationLogic.service.ReadTestingService;
 import com.polimi.insolesNoAPI.applicationLogic.service.TCPListenerService;
@@ -217,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements PermissionDialogL
     public void readClicked(View view){
         //startService(new Intent(this, ReadTestingService.class));
         InsolesManager insolesManager = new InsolesManager();
-        List<InsolesRawHeader> rawHeaderList = insolesManager.getAllRawHeaders(this);
+        List<InsolesRawHeader> rawHeaderList = insolesManager.getAllRawHeaders(ins);
 
         // Show Data from last trial
         long sessionID = rawHeaderList.get(rawHeaderList.size() - 1).getSessionID();

@@ -274,14 +274,14 @@ public class DaoInsoles extends Dao {
         Log.v(TAG, "Method retrieveAllRawHeaders: start");
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        String selection = "date BETWEEN ? AND ?";
+        //retrieve all data from the beginning
+/*        String selection = "date BETWEEN ? AND ?";
         long dateMillis = Calendar.getInstance().getTimeInMillis();
 
         String[] selectionArgs = {
                 getSpecificDayMidnight(dateMillis),
                 fromMillisToString(dateMillis)
-        };
+        };*/
 
         List<InsolesRawHeader> headerList = new ArrayList<>();
 
@@ -289,8 +289,8 @@ public class DaoInsoles extends Dao {
                 Cursor cursor = db.query(
                         DatabaseContract.InsolesRawHeaderTable.TABLE_NAME,      // The table to query
                         null,                                          // The columns to return
-                        selection,                                     // The columns for the WHERE clause
-                        selectionArgs,//selectionArgs,                 // The values for the WHERE clause
+                        null,                                     // The columns for the WHERE clause
+                        null,//selectionArgs,                 // The values for the WHERE clause
                         null,                                          // don't group the rows
                         null,                                          // don't filter by row groups
                         null                                           // The sort order

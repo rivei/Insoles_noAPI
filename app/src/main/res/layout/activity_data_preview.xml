@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DataPreviewActivity">
+
+    <TextView
+        android:id="@+id/totTimeView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Time"/>
+
+    <TextView
+        android:id="@+id/avgDiffView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/totTimeView"
+        android:text="Average Diff"/>
+
+    <TextView
+        android:id="@+id/avgDiffViewL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/avgDiffView"
+        android:text="Average Diff Left"/>
+
+    <TextView
+        android:id="@+id/avgDiffViewR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/avgDiffViewL"
+        android:text="Average Diff Right"/>
+
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="250dip"
+        android:id="@+id/graph"
+        app:layout_constraintTop_toBottomOf="@+id/avgDiffViewR"
+        />
+
+</android.support.constraint.ConstraintLayout>
